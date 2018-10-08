@@ -1,3 +1,23 @@
+from simulation import *
+from virus import *
+from person import *
+
+# import logging
+
+# logger = logging.getLogger(__name__)
+# logger.setLevel(logging.INFO)
+# # use logger for everything logging related
+
+# formatter = logging.Formatter("%(asctime)s: %(message)s")
+
+# file_handler = logging.FileHandler('logger.log')
+# file_handler.setFormatter(formatter)
+
+# logger.addHandler(file_handler)
+
+# logging.basicConfig(filename = "logger.log", level = logging.INFO, 
+#         format = "%(asctime)s: %(message)s")
+
 class Logger(object):
     '''
     Utility class responsible for logging all interactions of note during the
@@ -51,9 +71,9 @@ class Logger(object):
     '''
 
     def __init__(self, file_name):
+        self.file_name = file_name
         # TODO:  Finish this initialization method.  The file_name passed should be the
         # full file name of the file that the logs will be written to.
-        self.file_name = None
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
@@ -65,9 +85,12 @@ class Logger(object):
         # that we will store all logs in.  Be sure to use 'w' mode when you open the file.
         # For all other methods, we'll want to use the 'a' mode to append our new log to the end,
         # since 'w' overwrites the file.
-        # NOTE: Make sure to end every line with a '/n' character to ensure that each
+        # NOTE: Make sure to end every line with a '\n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        f = open(self.file_name, "w")
+        f.write("Population size: {}\t Vaccination %: {}\t Virus name: {}\t Mortality rate: {}\t Reproduction rate of virus: {}\n".format(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num))
+        f.close()
+
 
     def log_interaction(self, person1, person2, did_infect=None,
                         person2_vacc=None, person2_sick=None):
@@ -82,7 +105,9 @@ class Logger(object):
         # all the possible edge cases!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        f = open(self.file_name, "a")
+        f.write("Infected person ID: {}\t Contacted person ID: {}\t Did infect: {}\t Contact person vaccinated: {}\t Contact person infected: {}\n".format(person1, person2, did_infect, person2_vacc, person2_sick))
+        f.close()
 
     def log_infection_survival(self, person, did_die_from_infection):
         # TODO: Finish this method.  The Simulation object should use this method to log
@@ -92,7 +117,9 @@ class Logger(object):
         # on the format of the log.
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        f = open(self.file_name, "a")
+        f.write("Person infected: {}\t Person died from infection: {}\n".format(person, did_die_from_infection))
+        f.close()
 
     def log_time_step(self, time_step_number):
         # TODO: Finish this method.  This method should log when a time step ends, and a
@@ -103,4 +130,6 @@ class Logger(object):
         # to compute these statistics for you, as a Logger's job is just to write logs!
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+        f = open(self.file_name, "a")
+        f.write("Turn #: {}\n\n".format(time_step_number))
+        f.close()

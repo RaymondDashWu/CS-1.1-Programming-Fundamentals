@@ -1,7 +1,8 @@
 import random
-# TODO: Import the virus clase
+import simulation as Simulation
+import virus as Virus
 
-class Person(object):
+class Person(object):    
     '''
     Person objects will populate the simulation.
 
@@ -44,14 +45,20 @@ class Person(object):
     def __init__(self, _id, is_vaccinated, infected=None):
         # TODO:  Finish this method.  Follow the instructions in the class documentation
         # to set the corret values for the following attributes.
-        self._id = None
+        self._id = id
         self.is_vaccinated = None
-        self.is_alive = None
+        self.is_alive = True
         self.infected = None
 
-
-    def did_survive_infection():
+    def did_survive_infection(self):
+        while self.infected == None:
+            percentage = random.random()
+            if percentage >= Simulation.mortality_rate:
+                self.is_vaccinated = True
+                self.infected = False 
+            else:
+                self.is_alive = False
+ 
         # TODO:  Finish this method. Follow the instructions in the class documentation
         # for resolve_infection.  If person dies, set is_alive to False and return False.
         # If person lives, set is_vaccinated = True, infected = None, return True.  
-        pass
