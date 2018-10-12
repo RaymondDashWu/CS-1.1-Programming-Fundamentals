@@ -1,3 +1,5 @@
 [
-  "tester.py::test_virus"
+  "tester.py::test_person_init",
+  "tester.py::test_virus",
+  "tester.py::test_create_population"
 ]

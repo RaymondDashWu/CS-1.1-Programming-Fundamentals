@@ -1,1 +1,4 @@
-{}
+{
+  "tester.py::SimulationTest::test_should_continue_method": true,
+  "tester.py::test_did_survive": true
+}
